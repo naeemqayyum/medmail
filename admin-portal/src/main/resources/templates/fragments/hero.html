@@ -1,0 +1,14 @@
+<!-- hero fragment -->
+<section xmlns:th="http://www.thymeleaf.org" th:fragment="hero" class="container hero">
+    <div class="hero-grid">
+        <div>
+            <h1 class="headline" th:text="#{hero.headline}">Enterprise portal headline</h1>
+            <p class="sub"      th:text="#{hero.sub}">Sub copy from messages</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <a class="btn primary" th:href="@{/signup}"   th:text="#{cta.getStarted}">Get started</a>
+                <a class="btn"         th:href="@{/features}" th:text="#{cta.seeFeatures}">See features</a>
+            </div>
+        </div>
+        <aside class="hero-visual" aria-label="Product banner"></aside>
+    </div>
+</section>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title th:text="#{site.title}">Medmail Portal</title>
+    <link rel="stylesheet" th:href="@{/css/portal.css}" href="/css/portal.css"/>
+    <meta name="description" th:content="#{site.description}" content="Enterprise admin portal"/>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main>
+    <div th:replace="~{fragments/hero :: hero}"></div>
+    <div class="container section">
+        <h2 class="title" th:text="#{whatWeDo.title}">What we do</h2>
+        <p class="lead"  th:text="#{whatWeDo.body}">Body text</p>
+    </div>
+    <div th:replace="~{fragments/features :: features}"></div>
+    <div th:replace="~{fragments/pricing :: pricing}"></div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <div class="card" style="position:relative">
+        <button class="close-x" type="button" aria-label="Close" onclick="closeLogin()">×</button>
+        <h3 id="loginTitle" th:text="#{login.title}">Sign in</h3>
+        <form th:action="@{/login}" method="post" autocomplete="on">
+            <div class="form-row">
+                <label for="email" th:text="#{login.email}">Email</label>
+                <input id="email" name="username" type="email" placeholder="you@company.com" required/>
+            </div>
+            <div class="form-row">
+                <div class="row">
+                    <label for="password" style="margin:0" th:text="#{login.password}">Password</label>
+                    <a class="muted" th:href="@{/forgot}" th:text="#{login.forgot}">Forgot?</a>
+                </div>
+                <input id="password" name="password" type="password" placeholder="••••••••" required/>
+            </div>
+            <div class="row" style="margin-top:8px">
+                <label class="muted"><input type="checkbox" name="remember"/> <span th:text="#{login.remember}">Remember me</span></label>
+                <button class="btn primary" type="submit" th:text="#{cta.continue}">Continue</button>
+            </div>
+        </form>
+        <div class="row" style="margin-top:12px;justify-content:center">
+            <span class="muted" th:text="#{login.noAccount}">No account?</span>
+            <a class="btn" th:href="@{/signup}" th:text="#{cta.createOne}">Create one</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openLogin(){ document.getElementById('loginModal').classList.add('open'); setTimeout(()=>document.getElementById('email')?.focus(),120); }
+    function closeLogin(){ document.getElementById('loginModal').classList.remove('open'); }
+    window.addEventListener('keydown', e => { if(e.key === 'Escape') closeLogin(); });
+    document.getElementById('loginModal').addEventListener('click', e => { if(e.target.id==='loginModal') closeLogin(); });
+</script>
+</body>
+</html>

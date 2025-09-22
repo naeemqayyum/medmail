@@ -1,0 +1,22 @@
+<!-- footer fragment -->
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="footer">
+    <footer>
+        <div class="container footer">
+            <div>© <span th:text="${#dates.format(#dates.createNow(),'yyyy')}">2025</span>
+                <span th:text="#{site.name}">Medmail</span>
+            </div>
+            <div class="links">
+                <a th:href="@{/about}"   th:text="#{nav.about}">About</a>
+                <a th:href="@{/privacy}" th:text="#{nav.privacy}">Privacy</a>
+                <a th:href="@{/terms}"   th:text="#{nav.terms}">Terms</a>
+                <a th:href="@{/status}"  th:text="#{nav.status}">Status</a>
+                <a th:href="@{/contact}" th:text="#{nav.contact}">Contact</a>
+            </div>
+            <div class="social" aria-label="Follow us">
+                <a th:href="@{https://www.linkedin.com/company/}" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+                <a th:href="@{https://twitter.com/}"               aria-label="X/Twitter" target="_blank" rel="noopener">X</a>
+                <a th:href="@{https://github.com/}"                aria-label="GitHub"   target="_blank" rel="noopener">GH</a>
+            </div>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: admin-portal
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:medmail}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${DB_USER:root}
+    password: ${DB_PASS:root}
+  jpa:
+    hibernate:
+      ddl-auto: validate         # use 'update' in dev only; 'validate' in CI/prod
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc.time_zone: UTC
+  messages:
+    basename: messages
+    cache-duration: 1h
+  thymeleaf:
+    cache: false   # keep dev hot-reload friendly
+  flyway:
+    enabled: false
+    # OPTION A: keep migrations inside this module
+    locations: classpath:db/migration
+    # OPTION B (if you want to reuse your separate database module instead)
+    # locations: filesystem:../database/src/main/resources/db/migration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+server:
+  port: 8080

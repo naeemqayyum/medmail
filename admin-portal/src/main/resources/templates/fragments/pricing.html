@@ -1,0 +1,27 @@
+<!-- pricing fragment -->
+<section xmlns:th="http://www.thymeleaf.org" th:fragment="pricing" class="container section">
+    <h2 class="title" th:text="#{pricing.title}">Pricing</h2>
+    <p class="lead"  th:text="#{pricing.lead}">Lead</p>
+    <div class="pricing">
+        <div class="plan">
+            <h3 th:text="#{pricing.starter.name}">Starter</h3>
+            <div class="price">
+                <span th:text="#{pricing.starter.price}">$29</span><span class="muted">/mo</span>
+            </div>
+            <p class="muted" th:text="#{pricing.starter.copy}">Copy</p>
+            <a class="btn primary" th:href="@{/signup}" th:text="#{cta.startFree}">Start free</a>
+        </div>
+        <div class="plan">
+            <h3 th:text="#{pricing.pro.name}">Professional</h3>
+            <div class="price"><span th:text="#{pricing.pro.price}">$99</span><span class="muted">/mo</span></div>
+            <p class="muted" th:text="#{pricing.pro.copy}">Copy</p>
+            <a class="btn primary" th:href="@{/signup}" th:text="#{cta.choosePro}">Choose Pro</a>
+        </div>
+        <div class="plan">
+            <h3 th:text="#{pricing.ent.name}">Enterprise</h3>
+            <div class="price" th:text="#{pricing.ent.price}">Let’s talk</div>
+            <p class="muted" th:text="#{pricing.ent.copy}">Copy</p>
+            <a class="btn" th:href="@{/contact}" th:text="#{cta.contactSales}">Contact sales</a>
+        </div>
+    </div>
+</section>

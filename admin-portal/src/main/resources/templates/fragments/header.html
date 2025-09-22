@@ -1,0 +1,26 @@
+<!-- header fragment -->
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+    <header class="header">
+        <div class="container nav">
+            <a class="brand" th:href="@{/}">
+                <div class="logo" aria-label="Medmail">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 3l3.5 6H20l-8 12-8-12h4.5L12 3z" fill="white"/>
+                    </svg>
+                </div>
+                <div class="brandname" th:text="#{site.name}">Medmail</div>
+            </a>
+            <nav class="menu" aria-label="Primary">
+                <a th:href="@{/about}"    th:text="#{nav.about}">About</a>
+                <a th:href="@{/features}" th:text="#{nav.features}">Features</a>
+                <a th:href="@{/pricing}"  th:text="#{nav.pricing}">Pricing</a>
+                <a th:href="@{/contact}"  th:text="#{nav.contact}">Contact</a>
+                <a th:href="@{/follow}"   th:text="#{nav.follow}">Follow us</a>
+            </nav>
+            <div class="menu">
+                <a class="btn"          th:href="@{/signup}" th:text="#{cta.signup}">Sign up</a>
+                <button class="btn primary" type="button" onclick="openLogin()" th:text="#{cta.login}">Login</button>
+            </div>
+        </div>
+    </header>
+</div>
