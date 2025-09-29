@@ -36,10 +36,20 @@
     </dependency>
 
     <!-- Migrations -->
+    <!-- Flyway core -->
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
+      <version>10.10.0</version>
     </dependency>
+
+    <!-- Flyway MySQL support (Flyway 10 split DB support into separate artifacts) -->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-mysql</artifactId>
+      <version>10.10.0</version>
+    </dependency>
+
 
     <!-- Validation + Actuator (health/info) -->
     <dependency>
@@ -95,11 +105,10 @@
         <artifactId>mysql</artifactId>
         <scope>test</scope>
       </dependency>
-    <!-- H2 for dev profile -->
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>runtime</scope>
+      <groupId>com.medmail</groupId>
+      <artifactId>database</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
 
