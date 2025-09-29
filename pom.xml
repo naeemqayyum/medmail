@@ -13,6 +13,9 @@
     <java.version>21</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <spring-boot.version>3.3.4</spring-boot.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
   </properties>
 
   <modules>
@@ -23,7 +26,6 @@
     <module>admin-portal</module>
   </modules>
 
-  <!-- Centralized versions via BOMs -->
   <dependencyManagement>
     <dependencies>
       <!-- Spring Boot BOM -->
@@ -66,6 +68,7 @@
             <release>${java.version}</release>
           </configuration>
         </plugin>
+
         <!-- Unit tests -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -75,6 +78,7 @@
             <useModulePath>false</useModulePath>
           </configuration>
         </plugin>
+
         <!-- Integration tests (*IT.java) -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -82,6 +86,16 @@
           <version>3.5.1</version>
           <configuration>
             <useModulePath>false</useModulePath>
+          </configuration>
+        </plugin>
+
+        <!-- Spring Boot plugin version managed here -->
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+          <configuration>
+            <layers enabled="true"/>
           </configuration>
         </plugin>
       </plugins>

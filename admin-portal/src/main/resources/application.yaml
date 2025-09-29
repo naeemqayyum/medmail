@@ -1,35 +1,45 @@
 spring:
   application:
     name: admin-portal
+
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:medmail}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:medmail}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: ${DB_USER:root}
     password: ${DB_PASS:}
+    # driver-class-name: com.mysql.cj.jdbc.Driver   # (optional; Boot auto-detects)
 
   jpa:
     hibernate:
-      ddl-auto: validate         # use 'update' in dev only; 'validate' in CI/prod
+      ddl-auto: validate
     open-in-view: false
     properties:
       hibernate:
         format_sql: true
         jdbc.time_zone: UTC
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true   # if the DB might not be empty initially
+    clean-disabled: true        # safety in non-dev
+
+  thymeleaf:
+    cache: false
+
   messages:
     basename: messages
     cache-duration: 1h
-  thymeleaf:
-    cache: false   # keep dev hot-reload friendly
-  flyway:
-    enabled: true
-    # OPTION A: keep migrations inside this module
-    locations: classpath:db/migration
-    # OPTION B (if you want to reuse your separate database module instead)
-    # locations: filesystem:../database/src/main/resources/db/migration
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,flyway
+
 server:
   port: 8080
+
+# Temporary while troubleshooting:
+logging:
+  level:
+    org.flywaydb: DEBUG
