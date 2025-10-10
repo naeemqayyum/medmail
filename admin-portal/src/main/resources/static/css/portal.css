@@ -175,3 +175,40 @@ input{ width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(-
 input:focus{ border-color: var(--brand); box-shadow: 0 0 0 4px var(--ring) }
 .row{ display:flex; gap:10px; align-items:center; justify-content:space-between }
 .close-x{ position:absolute; right:14px; top:10px; background:transparent; border:0; color:var(--muted); font-size:24px; cursor:pointer }
+/* --- admin data tables --- */
+table.data { width:100%; border-collapse: separate; border-spacing:0 }
+table.data th, table.data td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align: top; }
+table.data th { position:sticky; top:0; background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)), var(--card); text-align:left; font-weight:700; }
+table.data tr:hover td { background: rgba(255,255,255,.03) }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px }
+/* --- Preview table: full width, single-line rows, no horizontal scroll --- */
+.table-wrap{ width:100%; padding:0 }             /* card gives border/shadow */
+.table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  table-layout:auto;                             /* let columns size naturally */
+}
+.table thead th{
+  text-align:left;
+  padding:14px 16px;
+  background: var(--surface);
+  border-bottom:1px solid var(--border);
+  font-weight:700;
+}
+.table tbody td{
+  padding:12px 16px;
+  vertical-align:top;
+  border-bottom:1px solid var(--border);
+}
+/* keep every record on a single line */
+.table--single-line th,
+.table--single-line td{
+  white-space: nowrap;                           /* no wrapping */
+}
+
+/* hover */
+.table tbody tr:hover td{ background: rgba(255,255,255,.03) }
+@media (prefers-color-scheme: light){
+  .table tbody tr:hover td{ background: rgba(11,17,27,.03) }
+}

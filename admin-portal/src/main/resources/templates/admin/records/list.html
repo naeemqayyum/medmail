@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Records | Medmail</title>
+  <link rel="stylesheet" th:href="@{/css/portal.css}" href="/css/portal.css"/>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="section">
+  <div class="container">
+    <div class="row" style="margin-bottom:12px">
+      <h2 class="title" style="margin:0">All records</h2>
+      <a class="btn" th:href="@{/admin/files}">Files</a>
+    </div>
+
+    <div class="card" style="overflow:auto">
+      <table style="width:100%; border-collapse:separate; border-spacing:0">
+        <thead>
+        <tr>
+          <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border)">ID</th>
+          <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border)">File</th>
+          <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border)">Status</th>
+          <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border)">Updated</th>
+          <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border)">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${page.content}">
+          <td style="padding:10px" th:text="${r.id}">1</td>
+          <td style="padding:10px">
+            <a class="btn" th:href="@{|/admin/files/${r.file.id}|}" th:text="${r.file.id}">file</a>
+          </td>
+          <td style="padding:10px" th:text="${r.status}">RECEIVED</td>
+          <td style="padding:10px" th:text="${r.updatedAt}">—</td>
+          <td style="padding:10px">
+            <form th:action="@{|/admin/files/records/${r.id}/status|}" method="post" class="row" style="gap:8px">
+              <select name="status" style="padding:8px 10px; border-radius:10px; background:transparent; color:var(--text); border:1px solid var(--border)">
+                <option th:each="s : ${T(com.medmail.portal.domain.IngestRecord.Status).values()}"
+                        th:value="${s}" th:text="${s}" th:selected="${s == r.status}"></option>
+              </select>
+              <button class="btn" type="submit">Update</button>
+            </form>
+          </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(page.content)}">
+          <td colspan="5" class="muted" style="padding:14px">No records yet.</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row" style="margin-top:10px; justify-content:space-between">
+      <span class="muted" th:text="'Page ' + ${page.number + 1} + ' of ' + ${page.totalPages}">Page 1 of 1</span>
+      <div class="row" style="gap:8px">
+        <a class="btn" th:if="${page.hasPrevious()}" th:href="@{|?page=${page.number - 1}&size=${page.size}|}">Prev</a>
+        <a class="btn" th:if="${page.hasNext()}" th:href="@{|?page=${page.number + 1}&size=${page.size}|}">Next</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

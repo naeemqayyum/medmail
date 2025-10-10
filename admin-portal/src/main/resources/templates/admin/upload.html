@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Upload JSON | Medmail</title>
+  <link rel="stylesheet" th:href="@{/css/portal.css}" href="/css/portal.css"/>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="section">
+  <div class="container">
+    <div class="card">
+      <h2 class="title" style="margin-bottom:14px">Upload raw JSON</h2>
+      <p class="muted" style="margin:0 0 18px">
+        Accepts a JSON array (of objects) or NDJSON (one JSON object per line).
+      </p>
+
+      <form th:action="@{/admin/files/preview}" method="post" enctype="multipart/form-data">
+        <div class="form-row">
+          <label for="file">File</label>
+          <input id="file" type="file" name="file" accept=".json,.ndjson,application/json" required>
+        </div>
+
+        <div class="row" style="justify-content:flex-end; gap:10px">
+          <a class="btn" th:href="@{/admin/files}">Cancel</a>
+          <button class="btn primary" type="submit">Upload &amp; parse</button>
+        </div>
+      </form>
+    </div>
+
+    <div th:if="${error}" class="card" style="margin-top:16px; border-color:#9b1c1c">
+      <strong style="color:#ffb4b4">Error:</strong>
+      <span th:text="${error}">Parsing failed</span>
+    </div>
+  </div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

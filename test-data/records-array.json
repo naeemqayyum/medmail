@@ -1,0 +1,32 @@
+[
+  {
+    "patientId": "P-1001",
+    "name": "Alice Q.",
+    "dob": "1990-04-12",
+    "exam": {
+      "type": "CBC",
+      "collectedAt": "2025-09-15T09:30:00Z"
+    },
+    "notes": "Routine check"
+  },
+  {
+    "patientId": "P-1002",
+    "name": "Brian T.",
+    "dob": "1984-11-02",
+    "exam": {
+      "type": "LFT",
+      "collectedAt": "2025-09-16T10:05:00Z"
+    },
+    "notes": "Mild symptoms"
+  },
+  {
+    "patientId": "P-1003",
+    "name": "Cara V.",
+    "dob": "2001-01-20",
+    "exam": {
+      "type": "Lipid Panel",
+      "collectedAt": "2025-09-17T14:42:00Z"
+    },
+    "flags": ["fasting"]
+  }
+]

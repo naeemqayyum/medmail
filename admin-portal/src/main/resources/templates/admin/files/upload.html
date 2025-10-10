@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Upload · Medmail Portal</title>
+  <link rel="stylesheet" th:href="@{/css/portal.css}" href="/css/portal.css"/>
+  <meta name="description" content="Upload JSON for preview & ingest"/>
+</head>
+<body>
+<!-- Branded header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container section">
+  <!-- Page header -->
+  <div class="row" style="margin-bottom:16px">
+    <h1 class="headline" style="font-size:28px; margin:0">Upload data</h1>
+    <div class="muted">JSON array or NDJSON (one JSON object per line)</div>
+  </div>
+
+  <!-- Alerts (flash) -->
+  <div th:if="${error}" class="card" style="border-color:#ff5f5f33; margin-bottom:16px">
+    <div style="color:#ffb3b3" th:text="${error}">There was an error.</div>
+  </div>
+  <div th:if="${success}" class="card" style="border-color:#2dd4bf33; margin-bottom:16px">
+    <div style="color:#99f6e4" th:text="${success}">Success.</div>
+  </div>
+
+  <!-- Upload card -->
+  <div class="card" style="margin-bottom:20px">
+    <form th:action="@{/admin/files/preview}" method="post" enctype="multipart/form-data" autocomplete="on">
+      <div class="form-row">
+        <label for="file">Select JSON file</label>
+        <input id="file" name="file" type="file" accept=".json,application/json" required/>
+      </div>
+
+      <div class="row" style="gap:12px; align-items:flex-end">
+        <div class="form-row" style="min-width:180px">
+          <label for="maxPreview">Max preview rows</label>
+          <input id="maxPreview" name="maxPreview" type="number" min="1" max="500" value="200"/>
+        </div>
+        <div class="row" style="gap:8px">
+          <a class="btn" th:href="@{/}" aria-label="Back to home">Cancel</a>
+          <button class="btn primary" type="submit">Preview</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Help / tips -->
+  <div class="muted" style="font-size:14px">
+    Tip: We support <code>["array","of","objects"]</code> or NDJSON. Nested fields appear as dotted headers
+    (e.g. <code>exam.type</code>, <code>flags[0]</code>).
+  </div>
+</main>
+
+<!-- Branded footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
